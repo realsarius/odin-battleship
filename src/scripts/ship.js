@@ -8,7 +8,6 @@ class Ship {
   hit() {
     this.hitTimes += 1;
     if (this.hitTimes >= this.length) this.sunk = true;
-    console.log(this.hitTimes);
   }
 
   isSunk = () => this.sunk;
