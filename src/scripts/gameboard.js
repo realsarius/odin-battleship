@@ -1,17 +1,18 @@
-const Ship = require('./ship');
-
 class Gameboard {
   constructor(_x = 10, _y = 10) {
     this.x = _x;
     this.y = _y;
     this.ui = [];
+    this.missedShots = [];
   }
 
   createUI() {
     for (let i = 0; i < this.x; i += 1) {
       this.ui[i] = [];
+      this.missedShots[i] = [];
       for (let j = 0; j < this.y; j += 1) {
         this.ui[i][j] = j + 1 + i * this.y;
+        this.missedShots[i][j] = j + 1 + i * this.y;
       }
     }
   }
@@ -61,20 +62,37 @@ class Gameboard {
       return false;
     }
   }
+
+  recieveAttack(x, y) {
+    if (x <= this.x && y <= this.y) {
+      if (typeof this.ui[x][y] === 'object') {
+        console.log(`Hit: x: ${x} y: ${y}`);
+        this.ui[x][y].hit();
+        if (this.ui[x][y].isSunk()) {
+          console.log('Ship has sunk');
+        }
+      } else {
+        this.missedShots[x][y] = 'missed';
+        console.log(this.missedShots);
+        console.log('missed');
+      }
+    } else {
+      console.log('out of boundaries');
+    }
+  }
+
+  report() {
+    for (let i = 0; i < this.x; i += 1) {
+      for (let j = 0; j < this.y; j += 1) {
+        console.log(`${i}, ${j}`);
+        if (typeof this.ui[i][j] === 'object') {
+          if (this.ui[i][j].isSunk()) {
+            console.log('The ship has sunk');
+          }
+        }
+      }
+    }
+  }
 }
-
-const gb = new Gameboard();
-gb.createUI();
-console.log(gb);
-
-const ship = new Ship(4);
-gb.placeShipVertical(ship, 7, 5);
-const ship2 = new Ship(4);
-gb.placeShipHorizontal(ship2, 0, 9);
-
-// const ship2 = new Ship(3);
-// gb.placeShipVertical(ship2, 3, 1);
-
-console.log(gb);
 
 module.exports = Gameboard;
