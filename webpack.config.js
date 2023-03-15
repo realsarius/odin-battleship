@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: 'index.bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -15,6 +16,11 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: [path.dirname('/node_modules')],
+        use: ['babel-loader'],
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
