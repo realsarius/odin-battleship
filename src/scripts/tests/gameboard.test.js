@@ -79,3 +79,37 @@ describe('Can place ships', () => {
     ]);
   });
 });
+
+describe('Recieving shots', () => {
+  test('Should test if the attack is missed ( 0 x 0 )', () => {
+    const gb = new Gameboard(6, 6);
+    gb.createUI();
+    const ship = new Ship(4);
+    gb.placeShipVertical(ship, 2, 2);
+    gb.recieveAttack(0, 0);
+    expect(gb.missedShots).toEqual([
+      ['missed', 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+      [13, 14, 15, 16, 17, 18],
+      [19, 20, 21, 22, 23, 24],
+      [25, 26, 27, 28, 29, 30],
+      [31, 32, 33, 34, 35, 36],
+    ]);
+  });
+
+  test('Should test if the attack is missed ( 5 x 5 )', () => {
+    const gb = new Gameboard(6, 6);
+    gb.createUI();
+    const ship = new Ship(4);
+    gb.placeShipVertical(ship, 2, 2);
+    gb.recieveAttack(5, 5);
+    expect(gb.missedShots).toEqual([
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+      [13, 14, 15, 16, 17, 18],
+      [19, 20, 21, 22, 23, 24],
+      [25, 26, 27, 28, 29, 30],
+      [31, 32, 33, 34, 35, 'missed'],
+    ]);
+  });
+});
