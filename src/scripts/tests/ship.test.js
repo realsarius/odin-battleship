@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const Ship = require('../ship');
 
 describe('Ship functions', () => {
