@@ -6,5 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
   </head>
-  <body></body>
+  <body>
+    <div
+      class="md:container md:mx-auto h-screen flex flex-col items-center justify-center gap-10"
+    >
+      <header class="h-1/4 flex items-center w-full justify-center">
+        <h1 class="font-sans text-4xl antialiased font-medium">BATTLESHIP</h1>
+      </header>
+      <main
+        class="h-2/4 flex gap-10 justify-center font-sans antialiased font-medium"
+      >
+        <div class="player">
+          <h1>Player Board</h1>
+          <div class="playerBoard grid"></div>
+        </div>
+        <div class="ai">
+          <h1>AI Board</h1>
+          <div class="aiBoard grid"></div>
+        </div>
+      </main>
+      <aside
+        class="h-1/4 font-sans antialiased w-full flex font-medium justify-center items-center"
+      >
+        <p>something</p>
+      </aside>
+    </div>
+  </body>
 </html>
